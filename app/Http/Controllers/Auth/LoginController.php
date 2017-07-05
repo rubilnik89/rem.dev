@@ -53,7 +53,6 @@ class LoginController extends Controller
                 'token' => $token,
                 'user_id' => $user->id
             ]);
-//            Cookie::forever('device', $token);
             $cookieJar->queue(cookie('device', $token, (525600 * 5)));
             
             return $this->sendLoginResponse($request);
@@ -69,7 +68,6 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-//        dd(Cookie::get('device'));
         $user = Auth::user();
         $token = Token::where('user_id', $user->id)->where('token', Cookie::get('device'))->first();
         if($token)

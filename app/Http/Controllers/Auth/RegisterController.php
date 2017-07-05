@@ -58,7 +58,6 @@ class RegisterController extends Controller
             'token' => $token,
             'user_id' => $user->id
         ]);
-//        Cookie::forever('device', $token);
         $cookieJar->queue(cookie('device', $token, (525600 * 5)));
 
         return $this->registered($request, $user)
