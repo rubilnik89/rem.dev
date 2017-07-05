@@ -69,8 +69,8 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         $user = Auth::user();
-        $token = Token::where('user_id', $user->id)->where('token', Cookie::get('device'))->first();
-        if($token)
+
+        if($token = Token::where('user_id', $user->id)->where('token', Cookie::get('device'))->first())
         {
             $token->delete();
         }
